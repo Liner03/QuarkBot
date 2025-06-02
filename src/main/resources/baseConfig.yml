@@ -1,0 +1,34 @@
+base:
+  api:
+    # gewe api
+    url:
+
+bot:
+  config:
+    # 管理员认证口令
+    auth-password:
+    # 消息回调地址
+    callback-url:
+    # 资源搜索接口
+    search-api:
+    # 是否自动添加好友 true | false
+    auto-accept-friends:
+    # 添加好友欢迎语
+    add-welcome-content:
+    # 自动进群关键词 支持正则表达式
+    match-keywords:
+    # 自动邀请进群列表 群满后按顺序向下
+    invite-group-name:  # 以 , 分割
+    # 机器人生效的群组
+    active-group:  # 以 , 分割
+    # 匹配搜剧的关键字 正则表达式
+    search-keywords: ^(搜剧|搜索|搜)\s*(.+)$
+
+quark:
+  config:
+    # 夸克 cookie
+    cookie:
+    # 自动转存的文件夹id 不知道就写 0 为根目录
+    save-path-fid: 0
+    # 附带文件的fid
+    ad-fid:

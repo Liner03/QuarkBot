@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lin.bot.mapper.DuanjuMapper">
+
+
+    <insert id="batchInsertTemp" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO duanju (name, url)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.name}, #{item.url})
+        </foreach>
+    </insert>
+
+
+    <update id="batchUpdateName">
+        UPDATE duanju
+        <trim prefix="SET" suffixOverrides=",">
+            <trim prefix="name = CASE" suffix="END,">
+                <foreach collection="list" item="item">
+                    WHEN id = #{item.id} THEN #{item.name}
+                </foreach>
+            </trim>
+        </trim>
+        WHERE id IN
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item.id}
+        </foreach>
+    </update>
+
+    <delete id="cleanTempData">
+        DELETE FROM duanju WHERE name LIKE 'TEMP_%'
+    </delete>
+
+    <select id="existsByUrl" resultType="boolean">
+        SELECT COUNT(1) FROM duanju WHERE url = #{url}
+    </select>
+
+
+</mapper>
+

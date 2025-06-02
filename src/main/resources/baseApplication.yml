@@ -1,0 +1,48 @@
+spring:
+  mail:
+    host:
+    port:
+    password:
+    properties:
+      mail:
+        smtp:
+          auth:
+          ssl:
+            enable:
+      debug:
+    protocol:
+    username:
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/lin_quark?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  config:
+    import: classpath:config.yml
+  web:
+    resources:
+      static-locations: /static/,file:./img/
+  data:
+    # redis
+    redis:
+      host:
+      port:
+      password:
+      lettuce:
+        pool:
+          max-active: 10      # 最大活跃连接数
+          max-idle: 8         # 最大空闲连接数
+          min-idle: 2         # 最小空闲连接数
+          max-wait: 5s        # 最大等待时间
+      timeout: 60s
+      database: 0
+server:
+  port: 8888
+magic-regex:
+  rules:
+    # 广告替换规则 默认无需更换
+    $AD:
+      pattern: ".*?(失效|年会员|空间容量|微信|微信群|全网资源|影视资源|扫码|最新资源|公众号|IMG_.*|资源汇总|緑铯粢源|\\.url|网盘推广|大额优惠券|资源文档|dy8\\.xyz|妙妙屋|资源合集|kkdm|裙|流量卡|qun|群|qq|q|资源站|更多资源|失联|短剧资源|群组).*?"
+      replace: ""
+

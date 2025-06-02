@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lin.bot.mapper.QuarkMapper">
+
+    <!-- 批量更新 -->
+    <update id="updateBatchById" parameterType="java.util.List">
+        update quark_table
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="valid =case" suffix="end,">
+                <foreach collection="list" item="item">
+                    when id=#{item.id} then #{item.valid}
+                </foreach>
+            </trim>
+            <!-- 添加其他需要更新的字段 -->
+            <trim prefix="url =case" suffix="end,">
+                <foreach collection="list" item="item">
+                    when id=#{item.id} then #{item.url}
+                </foreach>
+            </trim>
+            <trim prefix="password =case" suffix="end,">
+                <foreach collection="list" item="item">
+                    when id=#{item.id} then #{item.password}
+                </foreach>
+            </trim>
+            <trim prefix="update_time =case" suffix="end,">
+                <foreach collection="list" item="item">
+                    when id=#{item.id} then #{item.updateTime}
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach collection="list" item="item" separator="," open="(" close=")">
+            #{item.id}
+        </foreach>
+    </update>
+</mapper>
